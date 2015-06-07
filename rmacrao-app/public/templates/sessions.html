@@ -12,7 +12,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="list-group">
-					<div ng-show="days.length === 0" class="alert alert-info">Please add a session</div>
+					<div ng-show="days.length === 0" class="alert alert-info">Please add a day</div>
 					<div class="list-group-item" ng-repeat="day in days" ng-click="selectDay(day)" ng-class="{active: selectedDay === day}">
 						<h5>
 							<span ng-click="editDay(day)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-edit"></i></span>
@@ -33,6 +33,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="list-group">
+					<div ng-show="selectedDay.sessions.length === 0" class="alert alert-info">Please add a session</div>
 					<div class="list-group-item" ng-repeat="session in selectedDay.sessions" ng-click="selectSession(session)" ng-class="{active: selectedSession === session}">
 						<h5>
 							<span ng-click="editSession(session)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-edit"></i></span>
@@ -53,6 +54,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="list-group">
+					<div ng-show="selectedSession.events.length === 0" class="alert alert-info">Please add an event</div>
 					<div class="list-group-item" ng-repeat="event in selectedSession.events" ng-click="selectEvent(event)" ng-class="{active: selectedEvent === event}">
 						<h5>
 							<span ng-click="editEvent(event)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-edit"></i></span>

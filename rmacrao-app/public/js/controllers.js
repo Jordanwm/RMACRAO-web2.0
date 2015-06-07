@@ -137,6 +137,7 @@ angular.module('app.controllers', ['app.services'])
 
 	$scope.addSession = function(){
 		$scope.session = {};
+		$scope.edit = false;
 
 		var modalInstance = $modal.open({
 			animation: true,
@@ -182,6 +183,7 @@ angular.module('app.controllers', ['app.services'])
 	};
 
 	$scope.addEvent = function(){
+		$scope.edit = false;
 		$scope.event = {};
 		$scope.event.presenters = [];
 		$scope.event.facilitators = [];
@@ -359,7 +361,7 @@ angular.module('app.controllers', ['app.services'])
 			templateUrl: 'templates/speakerModal.html',
 			controller: 'SpeakerCtrl',
 			scope: $scope,
-			size: 'md'
+			size: 'lg'
 		});
 
 		modalInstance.result.then(function(speaker){
@@ -376,7 +378,7 @@ angular.module('app.controllers', ['app.services'])
 			templateUrl: 'templates/speakerModal.html',
 			controller: 'SpeakerCtrl',
 			scope: $scope,
-			size: 'md'
+			size: 'lg'
 		});
 
 		modalInstance.result.then(function(speaker){

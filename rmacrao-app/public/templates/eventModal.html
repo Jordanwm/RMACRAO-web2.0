@@ -8,24 +8,24 @@
 		<form class="col-md-8" name="eventForm" novalidate>
 			<div class="form-group" ng-class="{'has-error': eventForm.title.$invalid && eventForm.title.$touched}">
 				<label>Event Title<span class="small">*</span></label>
-				<input type="text" name="title" class="form-control" ng-model="event.title" required autocomplete="off">
+				<input type="text" name="title" class="form-control" ng-model="event.title" placeholder="Registration Open" required autocomplete="off">
 				<p class="help-block" ng-show="eventForm.title.$invalid && eventForm.title.$touched">Title is a required field</p>
 			</div>
 			<div class="form-group">
 				<label>Event Session ID</label>
-				<input type="text" class="form-control" ng-model="event.sid" autocomplete="off">
+				<input type="text" class="form-control" ng-model="event.sid" placeholder="1A" autocomplete="off">
 			</div>
 			<div class="form-group">
 				<label>Event Description</label>
-				<textarea class="form-control" id="" cols="30" rows="7" ng-model="event.description"></textarea>
+				<textarea class="form-control" rows="7" placeholder="Enter the description here. Copy and paste will preserve formatting like indentation and paragraphs." ng-model="event.description"></textarea>
 			</div>
 			<div class="form-group">
 				<label>Event Sponser</label>
-				<input type="text" class="form-control" ng-model="event.sponser" autocomplete="off">
+				<input type="text" class="form-control" placeholder="Company Inc" ng-model="event.sponser" autocomplete="off">
 			</div>
 			<div class="form-group" ng-class="{'has-error':eventForm.location.$invalid && eventForm.location.$touched}">
 				<label>Event Location<span class="small">*</span></label>
-				<input type="text" class="form-control" name="location" ng-model="event.location" required autocomplete="off">
+				<input type="text" class="form-control" name="location" placeholder="Ballroom" ng-model="event.location" required autocomplete="off">
 				<p class="help-block" ng-show="eventForm.location.$invalid && eventForm.location.$touched">Location is a required field</p>
 			</div>
 		</form>
@@ -65,12 +65,12 @@
 					<button type="button" class="close" ng-click="closeP()">&times;</button>
 					<div class="form-group" ng-class="{'has-error':presenterForm.name.$invalid && presenterForm.name.$touched}">
 						<label>Presenter Name<span class="small">*</span></label>
-						<input type="text" class="form-control" ng-model="presenter.name" name="name" required autocomplete="off">
+						<input type="text" class="form-control" ng-model="presenter.name" name="name" placeholder="John Doe" required autocomplete="off">
 						<p class="help-block" ng-show="presenterForm.name.$invalid && presenterForm.name.$touched">Name is a required field</p>
 					</div>
 					<div class="form-group" ng-class="{'has-error': presenterForm.title.$invalid && presenterForm.title.$touched}">
 						<label>Presenter School/Position<span class="small">*</span></label>
-						<input type="text" class="form-control" ng-model="presenter.title" name="title" required autocomplete="off">
+						<input type="text" class="form-control" ng-model="presenter.title" name="title" placeholder="CEO" required autocomplete="off">
 						<p class="help-block" ng-show="presenterForm.title.$invalid && presenterForm.title.$touched">Title is a required field</p>
 					</div>
 					<button class="btn btn-primary btn-xs" ng-click="submitPresenter()" ng-disabled="presenterForm.$invalid">Submit</button>
@@ -79,12 +79,12 @@
 					<button type="button" class="close" ng-click="closeF()">&times;</button>
 					<div class="form-group" ng-class="{'has-error':facilitatorForm.name.$invalid && facilitatorForm.name.$touched}">
 						<label>Facilitator Name<span class="small">*</span></label>
-						<input type="text" class="form-control" ng-model="facilitator.name" name="name" required autocomplete="off">
+						<input type="text" class="form-control" ng-model="facilitator.name" name="name" placeholder="John Doe" required autocomplete="off">
 						<p class="help-block" ng-show="facilitatorForm.name.$invalid && facilitatorForm.name.$touched">Name is a required field</p>
 					</div>
 					<div class="form-group" ng-class="{'has-error': facilitatorForm.title.$invalid && facilitatorForm.title.$touched}">
 						<label>Facilitator School/Position<span class="small">*</span></label>
-						<input type="text" class="form-control" ng-model="facilitator.title" name="title" required autocomplete="off">
+						<input type="text" class="form-control" ng-model="facilitator.title" name="title" placeholder="CEO" required autocomplete="off">
 						<p class="help-block" ng-show="facilitatorForm.title.$invalid && facilitatorForm.title.$touched">Title is a required field</p>
 					</div>
 					<button class="btn btn-primary btn-xs" ng-click="submitFacilitator()" ng-disabled="facilitatorForm.$invalid">Submit</button>

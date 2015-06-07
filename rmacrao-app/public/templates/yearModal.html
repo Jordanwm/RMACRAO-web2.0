@@ -4,65 +4,83 @@
 	<h4 ng-hide="edit" class="modal-title">Add a Year</h4>
 </div>
 <div class="modal-body">
-	<div class="form-group">
-		<label>Conference Title</label>
-		<input type="text" class="form-control" placeholder="RMACRAO Annual Meeting 2015" ng-model="year.title">
-	</div>
-	<div class="form-group">
-		<label>Conference Year</label>
-		<div>
-			<div style="display:inline-block;">
-				<datepicker
-					ng-model="year.year"
-					class="well well-sm"
-					min-mode="year" 
-					datepicker-mode="'year'"
-				></datepicker>
-			</div>
+	<form name="yearForm">
+		<div class="form-group" ng-class="{'has-error':yearForm.title.$invalid && yearForm.title.$touched}">
+			<label>Conference Title</label>
+			<input type="text" class="form-control" placeholder="RMACRAO Annual Meeting 2015" ng-model="year.title" name="title" required autocomplete="off">
+			<p class="help-block" ng-show="yearForm.title.$invalid && yearForm.title.$touched">Title is a required field</p>
 		</div>
-	</div>
-	<div class="form-group">
-		<label>Conference Start and End Date</label>
-		<div>
-			<div style="display:inline-block;">
-				<datepicker ng-model="year.sdate" class="well well-sm"></datepicker>
-			</div>
-			<div style="display:inline-block;">
-				<datepicker ng-model="year.fdate" class="well well-sm"></datepicker>
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<label>Conference Hotel</label>
-		<input type="text" class="form-control" ng-model="year.hotel" placeholder="Marriott Hotel and Conference Center">
-	</div>
-	<div class="form-group">
-		<label>Conference Location</label>
-		<div class="row">
-			<div class="col-xs-8">
-				<div class="input-group">
-					<p class="input-group-addon">City:</p>
-					<input type="text" ng-model="year.city" class="form-control" placeholder="Colorado Springs">
+		<div class="form-group" ng-class="{ 'has-error': yearForm.year.$invalid}">
+			<label>Conference Year</label>
+			<div>
+				<div style="display:inline-block;">
+					<datepicker
+						ng-model="year.year"
+						class="well well-sm"
+						min-mode="year" 
+						datepicker-mode="'year'"
+						required
+						name="year"
+					></datepicker>
 				</div>
+				<p class="help-block" ng-show="yearForm.year.$invalid">Year is a required field</p>
 			</div>
-			<div class="col-xs-4">
-				<div class="input-group">
-					<p class="input-group-addon">State:</p>
-					<select ng-model="year.state" class="form-control" ng-options="state for state in states" ng-init="year.state=states[0]"></select>
+		</div>
+		<div class="form-group">
+			<label>Conference Start and End Date</label>
+			<div>
+				<div style="display:inline-block;" ng-class="{ 'has-error': yearForm.sdate.$invalid}">
+					<div class="well well-sm">
+						<datepicker ng-model="year.sdate" name="sdate" required></datepicker>
+						<p class="help-block text-center">Start Date</p>
+					</div>
+					<p class="help-block" ng-show="yearForm.sdate.$invalid">Start Date is required</p>
+				</div>
+				<div style="display:inline-block;" ng-class="{ 'has-error': yearForm.fdate.$invalid}">
+					<div class="well well-sm">
+						<datepicker ng-model="year.fdate" name="fdate" required></datepicker>
+						<p class="help-block text-center">End Date</p>
+					</div>
+					<p class="help-block" ng-show="yearForm.fdate.$invalid">End Date is required</p>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		<label>Conference Motto</label>
-		<input type="text" class="form-control" ng-model="year.motto" placeholder="High Impact on Higher Education">
-	</div>
-	<div class="form-group">
-		<label>President's Letter</label>
-		<textarea ng-model="year.president_message" rows="10" class="form-control" placeholder="Enter the president's letter here. Copy and paste will preserve formatting like indentation and paragraphs."></textarea>
-	</div>
+		<div class="form-group" ng-class="{'has-error': yearForm.hotel.$invalid && yearForm.hotel.$touched}">
+			<label>Conference Hotel</label>
+			<input type="text" class="form-control" ng-model="year.hotel" placeholder="Marriott Hotel and Conference Center" name="hotel" required autocomplete="off">
+			<p class="help-block" ng-show="yearForm.hotel.$invalid && yearForm.hotel.$touched">Hotel is a required field</p>
+		</div>
+		<div class="form-group">
+			<label>Conference Location</label>
+			<div class="row">
+				<div class="col-xs-8" ng-class="{'has-error': yearForm.city.$invalid && yearForm.city.$touched}">
+					<div class="input-group">
+						<p class="input-group-addon">City:</p>
+						<input type="text" ng-model="year.city" class="form-control" placeholder="Colorado Springs" name="city" required autocomplete="off">
+					</div>
+					<p class="help-block" ng-show="yearForm.city.$invalid && yearForm.city.$touched">City is a required field</p>
+				</div>
+				<div class="col-xs-4">
+					<div class="input-group">
+						<p class="input-group-addon">State:</p>
+						<select ng-model="year.state" class="form-control" ng-options="state for state in states" ng-init="year.state=states[0]"></select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group" ng-class="{'has-error': yearForm.motto.$invalid && yearForm.motto.$touched}">
+			<label>Conference Motto</label>
+			<input type="text" class="form-control" ng-model="year.motto" placeholder="High Impact on Higher Education" name="motto" required autocomplete="off">
+			<p class="help-block" ng-show="yearForm.motto.$invalid && yearForm.motto.$touched">Motto is a required field</p>
+		</div>
+		<div class="form-group" ng-class="{'has-error': yearForm.letter.$invalid && yearForm.letter.$touched}">
+			<label>President's Letter</label>
+			<textarea ng-model="year.president_message" rows="10" class="form-control" placeholder="Enter the president's letter here. Copy and paste will preserve formatting like indentation and paragraphs." name="letter" required></textarea>
+			<p class="help-block" ng-show="yearForm.letter.$invalid && yearForm.letter.$touched">President's Letter is a required field.</p>
+		</div>
+	</form>
 </div>
 <div class="modal-footer">
-	<button class="btn btn-primary" ng-click="ok()">OK</button>
+	<button class="btn btn-primary" ng-click="ok()" ng-disabled="yearForm.$invalid">OK</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
