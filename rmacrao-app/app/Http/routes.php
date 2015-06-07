@@ -19,12 +19,12 @@ Route::get('/logout', function(){
 	return redirect('/');
 });
 
-Route::group(['prefix'=>'api'], function(){
+//GET ALL FOR THE VARIOUS CONTROLLERS
+Route::get('api/years', 'YearController@getYears');
+Route::get('api/days', 'DayController@getDays');
+Route::get('api/speakers', 'SpeakerController@getSpeakers');
 
-	//GET ALL FOR THE VARIOUS CONTROLLERS
-	Route::get('/years', 'YearController@getYears');
-	Route::get('/days', 'DayController@getDays');
-	Route::get('/speakers', 'SpeakerController@getSpeakers');
+Route::group(['prefix'=>'api', 'middleware'=>'auth'], function(){
 
 	//YEARS CONTROLLER
 	Route::post('/years', 'YearController@store');
