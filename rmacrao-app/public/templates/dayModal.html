@@ -1,0 +1,21 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="cancel()">&times;</button>
+	<h4 ng-show="edit" class="modal-title">Modify Day</h4>
+	<h4 ng-hide="edit" class="modal-title">Add a Day</h4>
+</div>
+<div class="modal-body">
+	<form name="dayForm" novalidate>
+		<div class="form-group" ng-class="{ 'has-error': dayForm.day.$invalid}">
+			<label>Select a Date<span class="small">*</span></label>
+			<p class="help-block" ng-show="dayForm.day.$invalid">Date is a required field</p>
+			<datepicker ng-model="day.day" show-weeks='false' class="well well-xs"></datepicker>
+
+			<input type="hidden" ng-model="day.day" name="day" required>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button ng-show="edit" ng-click="deleteDay(day)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+	<button class="btn btn-primary" ng-click="ok()" ng-disabled="dayForm.$invalid">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

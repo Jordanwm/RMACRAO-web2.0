@@ -1,0 +1,30 @@
+<div class="page-header">
+	<h4>
+		<div class="btn btn-default pull-right" ng-click="addYear()"><i class="glyphicon glyphicon-plus"></i> Add a New Year</div>
+		Years
+	</h4>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div ng-show="years.length === 0" class="alert alert-info">Please add a year</div>
+		<alert ng-show="info && years.length > 0" type="info" close="closeInfo()">{{info}}</alert>
+		<accordion close-other="oneAtATime">
+			<accordion-group ng-repeat="year in years">
+				<accordion-heading>
+					{{year.year}} <span ng-show="year.active == true" class="pull-right">Active</span>
+				</accordion-heading>
+				<div class="pull-right btn-group">
+					<div class="btn btn-default" ng-class="{active:year.active == true}" ng-click="activateYear(year)">Activate this Year</div>
+					<div class="btn btn-default" ng-click="editYear(year)">Edit <i class="glyphicon glyphicon-edit"></i></div>
+					<div class="btn btn-danger" ng-click="deleteYear(year)"><i class="glyphicon glyphicon-trash"></i></div>
+				</div>
+				<h5><strong>Conference Title</strong></h5><h6>{{year.title}}</h6>
+				<h5><strong>Conference Dates</strong></h5><h6>{{year.sdate | date: "fullDate"}} - {{year.fdate | date: "fullDate"}}</h6>
+				<h5><strong>Conference Hotel</strong></h5><h6>{{year.hotel}}</h6>
+				<h5><strong>Conference Location</strong></h5><h6>{{year.city}}, {{year.state}}</h6>
+				<h5><strong>Conference Motto</strong></h5><h6>{{year.motto}}</h6>
+				<h5><strong>President's Message</strong></h5><div class="h6" style="white-space:pre-wrap;">{{year.president_message}}</div>
+			</accordion-group>
+		</accordion>
+	</div>
+</div>

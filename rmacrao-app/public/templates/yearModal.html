@@ -1,0 +1,68 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="cancel()">&times;</button>
+	<h4 ng-show="edit" class="modal-title">Modify Year</h4>
+	<h4 ng-hide="edit" class="modal-title">Add a Year</h4>
+</div>
+<div class="modal-body">
+	<div class="form-group">
+		<label>Conference Title</label>
+		<input type="text" class="form-control" placeholder="RMACRAO Annual Meeting 2015" ng-model="year.title">
+	</div>
+	<div class="form-group">
+		<label>Conference Year</label>
+		<div>
+			<div style="display:inline-block;">
+				<datepicker
+					ng-model="year.year"
+					class="well well-sm"
+					min-mode="year" 
+					datepicker-mode="'year'"
+				></datepicker>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Conference Start and End Date</label>
+		<div>
+			<div style="display:inline-block;">
+				<datepicker ng-model="year.sdate" class="well well-sm"></datepicker>
+			</div>
+			<div style="display:inline-block;">
+				<datepicker ng-model="year.fdate" class="well well-sm"></datepicker>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Conference Hotel</label>
+		<input type="text" class="form-control" ng-model="year.hotel" placeholder="Marriott Hotel and Conference Center">
+	</div>
+	<div class="form-group">
+		<label>Conference Location</label>
+		<div class="row">
+			<div class="col-xs-8">
+				<div class="input-group">
+					<p class="input-group-addon">City:</p>
+					<input type="text" ng-model="year.city" class="form-control" placeholder="Colorado Springs">
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="input-group">
+					<p class="input-group-addon">State:</p>
+					<select ng-model="year.state" class="form-control" ng-options="state for state in states" ng-init="year.state=states[0]"></select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Conference Motto</label>
+		<input type="text" class="form-control" ng-model="year.motto" placeholder="High Impact on Higher Education">
+	</div>
+	<div class="form-group">
+		<label>President's Letter</label>
+		<textarea ng-model="year.president_message" rows="10" class="form-control" placeholder="Enter the president's letter here. Copy and paste will preserve formatting like indentation and paragraphs."></textarea>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
