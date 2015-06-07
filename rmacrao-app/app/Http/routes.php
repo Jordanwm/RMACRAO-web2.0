@@ -11,6 +11,12 @@
 |
 */
 
+// Purely for setup purposes, comment out when done with setup!!!
+Route::get('/setup', function(){
+	Artisan::call('migrate');
+	Artisan::call('db:seed');
+});
+
 Route::get('/', function(){return view('home');});
 Route::get('/app', ['middleware'=>'auth', function(){return view('app');}]);
 Route::get('/login', 'AuthController@loginWithGoogle');
