@@ -137,6 +137,7 @@ return [
 		'Illuminate\View\ViewServiceProvider',
 
 		'Artdarek\OAuth\OAuthServiceProvider',
+		'Barryvdh\Cors\CorsServiceProvider',
 
 		/*
 		 * Application Service Providers...
