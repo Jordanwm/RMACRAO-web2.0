@@ -9,7 +9,7 @@
 		.page-header {margin-top:0;}
 	</style>
 </head>
-<body ng-app="app">
+<body>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -25,11 +25,9 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li><a ui-sref="home">Home</a></li>
-					<li><a ui-sref="years">Years</a></li>
-					<li><a ui-sref="sessions">Sessions</a></li>
-					<li><a ui-sref="speakers">Speakers</a></li>
-					<li><a ui-sref="exhibitors">Exhibitors</a></li>
+					@if(!Auth::guest())
+						<li><a href="app">App</a></li>
+					@endif
 				</ul>
 				
 				<ul class="nav navbar-nav navbar-right">
@@ -43,17 +41,23 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-	<div class="container">
-		<ui-view></ui-view>
-	</div>
 	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Welcome
+					</div>
+					<div class="panel-body">
+						To use this application you will have to log in using google. To begin, click the login button in the top right hand corner.
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
-	<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
-	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="/js/app.js"></script>
-	<script src="/js/controllers.js"></script>
-	<script src="/js/services.js"></script>
 </body>
 </html>

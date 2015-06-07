@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', function(){return view('app');});
+Route::get('/', function(){return view('home');});
+Route::get('/app', ['middleware'=>'auth', function(){return view('app');}]);
+Route::get('/login', 'AuthController@loginWithGoogle');
+Route::get('/logout', function(){
+	Auth::logout();
+	return redirect('/');
+});
 
 Route::group(['prefix'=>'api'], function(){
 

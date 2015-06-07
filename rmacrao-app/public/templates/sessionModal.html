@@ -7,7 +7,7 @@
 	<form name="sessionForm" novalidate>
 		<div class="form-group" ng-class="{ 'has-error':sessionForm.name.$invalid && sessionForm.name.$touched}">
 			<label>Session Name<span class="small">*</span></label>
-			<input class="form-control" type="text" ng-model="session.name" name="name" autocomplete="off" required>
+			<input class="form-control" type="text" ng-model="session.name" placeholder="Regsitration Open" name="name" autocomplete="off" required>
 			<p class="help-block" ng-show="sessionForm.name.$invalid && sessionForm.name.$touched">Session name is a required field</p>
 		</div>
 		<div class="form-group">
