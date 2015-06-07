@@ -411,4 +411,100 @@ angular.module('app.controllers', ['app.services'])
 	$scope.cancel = function(){
 		$modalInstance.dismiss('cancel')
 	};
+})
+
+.controller('ExhibitorsMainCtrl', function($scope, $modal, Exhibitors, Years){
+	$scope.years = Years.years;
+	$scope.exhibitors = Exhibitors.exhibitors;
+	$scope.oneAtATime = true;
+
+	$scope.addExhibitor = function(){
+		$scope.exhibitor = {};
+		$scope.exhibitor.staff = [];
+
+		var modalInstance = $modal.open({
+			animation: true,
+			templateUrl: 'templates/exhibitorModal.html',
+			controller: 'ExhibitorCtrl',
+			scope: $scope,
+			size: 'lg'
+		});
+
+		modalInstance.result.then(function(exhibitor){
+			Exhibitors.createExhibitor(exhibitor);
+		});
+	};
+
+	$scope.editExhibitor = function(exhibitor){
+		$scope.exhibitor = angular.copy(exhibitor);
+		$scope.edit = true;
+
+		var modalInstance = $modal.open({
+			animation: true,
+			templateUrl: 'templates/exhibitorModal.html',
+			controller: 'ExhibitorCtrl',
+			scope: $scope,
+			size: 'lg'
+		});
+
+		modalInstance.result.then(function(exhibitor){
+			Exhibitors.updateExhibitor(exhibitor);
+		});
+	};
+	$scope.deleteExhibitor = function(exhibitor){
+		if (confirm("Are you sure you want to delete " + exhibitor.name + "?")){
+			Exhibitors.deleteExhibitor(exhibitor);
+		}
+	};
+
+	$scope.info = "Click on a name to display their information."
+	$scope.closeInfo = function() {
+		$scope.info = null;
+	};
+})
+
+.controller('ExhibitorCtrl', function($scope, $modalInstance){
+	$scope.states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+
+	$scope.addStaff = function(){
+		$scope.addEditS = true;
+		$scope.staff = {name:"", title:""};
+		$scope.staffForm.$setPristine();
+		$scope.staffForm.$setUntouched();
+	};
+	$scope.editStaff = function(staff){
+		$scope.addEditS = true;
+		$scope.editS = staff;
+		$scope.staff = angular.copy(staff);
+	};
+	$scope.submitStaff = function(){
+		$scope.addEditS = false;
+
+		if ($scope.editS) {
+			index = $scope.exhibitor.staff.indexOf($scope.editS);
+			$scope.exhibitor.staff[index] = $scope.staff;
+		} else {
+			$scope.exhibitor.staff.push($scope.staff);
+		}
+
+		$scope.editS = null;
+		$scope.staff = null;
+	};
+	$scope.removeStaff = function(staff){
+		if (confirm("Are you sure you want to remove this staff member?")){
+			$scope.exhibitor.staff.splice($scope.exhibitor.staff.indexOf(staff),1);
+		}
+	};
+	$scope.closeS = function(){
+		$scope.addEditS = false;
+		$scope.editS = null;
+		$scope.staff = null;
+	};
+
+	$scope.ok = function(){
+		$modalInstance.close($scope.exhibitor)
+	};
+	$scope.cancel = function(){
+		$modalInstance.dismiss('cancel')
+	};
 });

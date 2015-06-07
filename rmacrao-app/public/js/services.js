@@ -166,4 +166,37 @@ angular.module('app.services', [])
 		});
 	};
 	return o;
+})
+.factory('Exhibitors', function($http){
+	var o = {};
+	o.exhibitors = [];
+	o.createExhibitor = function(exhibitor){
+		$http.post('/api/exhibitors', exhibitor).then(function(res){
+			o.exhibitors.push(res.data);
+		});
+	};
+	o.updateExhibitor = function(exhibitor){
+		$http.put('/api/exhibitors/' + exhibitor.id, exhibitor).then(function(res){
+			o.exhibitors.forEach(function(s, i){
+				if (s.id == res.data.id){
+					o.exhibitors[i] = res.data;
+				}
+			});
+		});
+	};
+	o.deleteExhibitor = function(exhibitor){
+		$http.delete('/api/exhibitors/' + exhibitor.id).then(function(res){
+			o.exhibitors.forEach(function(s, i){
+				if (s.id == res.data.id){
+					o.exhibitors.splice(i,1);
+				}
+			});
+		});
+	};
+	o.getAll = function(){
+		return $http.get('/api/exhibitors').then(function(res){
+			o.exhibitors = res.data;
+		});
+	};
+	return o;
 });

@@ -71,7 +71,7 @@
 					<div class="form-group" ng-class="{'has-error': presenterForm.title.$invalid && presenterForm.title.$touched}">
 						<label>Presenter School/Position<span class="small">*</span></label>
 						<input type="text" class="form-control" ng-model="presenter.title" name="title" required autocomplete="off">
-						<p class="help-block" ng-show="presenterForm.title.$invalid && presenterForm.title.$touched">Name is a required field</p>
+						<p class="help-block" ng-show="presenterForm.title.$invalid && presenterForm.title.$touched">Title is a required field</p>
 					</div>
 					<button class="btn btn-primary btn-xs" ng-click="submitPresenter()" ng-disabled="presenterForm.$invalid">Submit</button>
 				</form>
@@ -85,7 +85,7 @@
 					<div class="form-group" ng-class="{'has-error': facilitatorForm.title.$invalid && facilitatorForm.title.$touched}">
 						<label>Facilitator School/Position<span class="small">*</span></label>
 						<input type="text" class="form-control" ng-model="facilitator.title" name="title" required autocomplete="off">
-						<p class="help-block" ng-show="facilitatorForm.title.$invalid && facilitatorForm.title.$touched">Name is a required field</p>
+						<p class="help-block" ng-show="facilitatorForm.title.$invalid && facilitatorForm.title.$touched">Title is a required field</p>
 					</div>
 					<button class="btn btn-primary btn-xs" ng-click="submitFacilitator()" ng-disabled="facilitatorForm.$invalid">Submit</button>
 				</form>

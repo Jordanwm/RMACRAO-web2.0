@@ -8,6 +8,8 @@ class Staff extends Model {
 		return $this->belongsTo('App\Exhibitor');
 	}
 
+	protected $fillable = ['name', 'title'];
+
 	public $timestamps = false;
 
 }

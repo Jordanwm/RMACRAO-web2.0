@@ -23,6 +23,7 @@ Route::get('/logout', function(){
 Route::get('api/years', 'YearController@getYears');
 Route::get('api/days', 'DayController@getDays');
 Route::get('api/speakers', 'SpeakerController@getSpeakers');
+Route::get('api/exhibitors', 'ExhibitorController@getExhibitors');
 
 Route::group(['prefix'=>'api', 'middleware'=>'auth'], function(){
 
@@ -49,5 +50,10 @@ Route::group(['prefix'=>'api', 'middleware'=>'auth'], function(){
 	Route::Post('/speakers', 'SpeakerController@store');
 	Route::Put('/speakers/{id}', 'SpeakerController@update');
 	Route::Delete('/speakers/{id}', 'SpeakerController@destroy');
+
+	//EXHIBITORS CONTROLLER
+	Route::Post('/exhibitors', 'ExhibitorController@store');
+	Route::Put('/exhibitors/{id}', 'ExhibitorController@update');
+	Route::Delete('/exhibitors/{id}', 'ExhibitorController@destroy');
 });
 

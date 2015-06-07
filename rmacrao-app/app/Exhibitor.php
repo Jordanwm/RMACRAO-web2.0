@@ -12,6 +12,8 @@ class Exhibitor extends Model {
 		return $this->belongsTo('App\Year');
 	}
 
+	protected $fillable = ['name', 'address', 'city', 'state', 'zip', 'description'];
+		
 	public $timestamps = false;
 
 }

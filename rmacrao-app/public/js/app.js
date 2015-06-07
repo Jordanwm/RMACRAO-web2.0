@@ -37,5 +37,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					return Speakers.getAll();
 				}
 			}
+		})
+		.state('exhibitors',{
+			url: "/exhibitors",
+			controller: "ExhibitorsMainCtrl",
+			templateUrl: "templates/exhibitors.html",
+			resolve: {
+				exhibitorsPromise: function(Exhibitors){
+					return Exhibitors.getAll();
+				}
+			}
 		});
 });

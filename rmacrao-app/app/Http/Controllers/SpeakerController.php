@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use App\Year;
 use App\Speaker;
 
-use Log;
-
 class SpeakerController extends Controller {
 
 	private function activeYear() {
@@ -54,8 +52,6 @@ class SpeakerController extends Controller {
 
 			$speaker->year()->associate($year);
 			$speaker->save();
-
-			Log::Info($speaker);
 
 			return json_encode($this->getSpeaker($speaker->id));
 		}
