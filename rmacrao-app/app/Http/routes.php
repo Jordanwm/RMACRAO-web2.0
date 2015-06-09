@@ -12,10 +12,11 @@
 */
 
 // Purely for setup purposes, comment out when done with setup!!!
-Route::get('/setup', function(){
-	Artisan::call('migrate');
+/*Route::get('/setup', function(){
+    Artisan::call('migrate');
 	Artisan::call('db:seed');
-});
+    return "YAY";
+});*/
 
 Route::get('/', function(){return view('home');});
 Route::get('/app', ['middleware'=>'auth', function(){return view('app');}]);
@@ -26,6 +27,7 @@ Route::get('/logout', function(){
 });
 
 //GET ALL FOR THE VARIOUS CONTROLLERS
+Route::get('api/year', 'YearController@getYear');
 Route::get('api/years', 'YearController@getYears');
 Route::get('api/days', 'DayController@getDays');
 Route::get('api/speakers', 'SpeakerController@getSpeakers');

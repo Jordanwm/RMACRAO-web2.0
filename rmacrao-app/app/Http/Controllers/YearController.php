@@ -11,12 +11,20 @@ use App\Speaker;
 use App\Exhibitor;
 
 class YearController extends Controller {
+    
+    // Get and return the active year information
+    public function getYear()
+    {
+        return json_encode(Year::where('active', '=', 1)->first());
+    }
 
+    // Get all the years and return
 	public function getYears() 
 	{
 		return json_encode(Year::all());
 	}
 
+    // Activate a particular year
 	public function activateYear($id) {
 		$years = Year::all();
 

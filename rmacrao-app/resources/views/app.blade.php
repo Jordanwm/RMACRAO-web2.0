@@ -10,7 +10,7 @@
 	</style>
 </head>
 <body ng-app="app">
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-static-top navbar-inverse">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">

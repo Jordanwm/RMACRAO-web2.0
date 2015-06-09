@@ -15,7 +15,7 @@ class AuthController extends Controller {
 	    $code = $request->get('code');
 
 	    // get google service
-	    $googleService = \OAuth::consumer('Google');
+	    $googleService = \OAuth::consumer('Google', 'http://mobiledev.rmacrao.org/login');
 
 	    // check if code is valid
 
