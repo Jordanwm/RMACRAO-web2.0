@@ -1,0 +1,61 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="cancel()">&times;</button>
+	<h4 ng-show="edit" class="modal-title">Modify Speaker</h4>
+	<h4 ng-hide="edit" class="modal-title">Add a Speaker</h4>
+</div>
+<form class="modal-body" name="speakerForm" novalidate>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="form-group" ng-class="{ 'has-error': speakerForm.name.$invalid && speakerForm.name.$touched}">
+				<label>Name<span class="small">*</span></label>
+				<input type="text" class="form-control" placeholder="John Doe" ng-model="speaker.name" name="name" required>
+				<p class="help-block" ng-show="speakerForm.name.$invalid && speakerForm.name.$touched">Name is a required field</p>
+			</div>
+			<div class="form-group">
+				<label>Session</label>
+				<input type="text" class="form-control" placeholder="Opening Session" ng-model="speaker.session">
+			</div>
+			<div class="form-group">
+				<label>Session Start and End Time<span class="small">*</span></label>
+				<div>
+					<div style="display:inline-block;">
+						<div class="well well-sm">
+							<timepicker ng-model="speaker.stime" minute-step="15" hour-step="1" show-meridian="true"></timepicker>
+							<h6 class="text-center">Start Time</h6>
+						</div>
+					</div>
+					<div style="display:inline-block;">
+						<div class="well well-sm">
+							<timepicker ng-model="speaker.ftime" minute-step="15" hour-step="1" show-meridian="true"></timepicker>
+							<h6 class="text-center">End Time</h6>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Title</label>
+				<input type="text" class="form-control" ng-model="speaker.title" placeholder="Title of Talk">
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group" ng-class="{'has-error':speakerForm.day.$invalid}">
+				<label>Date<span class="small">*</span></label>
+				<div>
+					<div style="display:inline-block;">
+						<datepicker ng-model="speaker.day" show-weeks='false' class="well well-xs" name="day" required></datepicker>
+						<p class="help-block" ng-show="speakerForm.day.$invalid">Date is a required field</p>
+					</div>
+				</div>
+			</div>
+			<div class="form-group" ng-class="{ 'has-error': speakerForm.location.$invalid && speakerForm.location.$touched}">
+				<label>Location<span class="small">*</span></label>
+				<input type="text" class="form-control" placeholder="Grand Ballroom" ng-model="speaker.location" name="location" required>
+				<p class="help-block" ng-show="speakerForm.location.$invalid && speakerForm.location.$touched">Location is a required field</p>
+			</div>
+		</div>
+	</div>
+</form>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()" ng-disabled="speakerForm.$invalid">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

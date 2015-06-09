@@ -1,0 +1,35 @@
+<div class="alert alert-warning" ng-show="years.length == 0">
+	You must create a year before you can add speakers.
+</div>
+<div ng-hide="years.length == 0">
+	<div class="page-header">
+		<h4>
+			<div class="btn btn-default pull-right" ng-click="addSpeaker()"><i class="glyphicon glyphicon-plus"></i> Add a New Speaker</div>
+			Speakers
+		</h4>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div ng-show="speakers.length == 0" class="alert alert-info">Please add a speaker</div>
+			<alert ng-show="info && speakers.length > 0" type="info" close="closeInfo()">{{info}}</alert>
+			<accordion close-other="oneAtATime">
+				<accordion-group ng-repeat="speaker in speakers" heading="{{speaker.name}}">
+					<div class="pull-right btn-group">
+						<div class="btn btn-default" ng-click="editSpeaker(speaker)">Edit <i class="glyphicon glyphicon-edit"></i></div>
+						<div class="btn btn-danger" ng-click="deleteSpeaker(speaker)"><i class="glyphicon glyphicon-trash"></i></div>
+					</div>
+					<h5><strong>Session</strong></h5>
+					<h6>{{speaker.session}}</h6>
+					<h5><strong>Day</strong></h5>
+					<h6>{{speaker.day | date: "fullDate"}}</h6>
+					<h5><strong>Time</strong></h5>
+					<h6>{{speaker.stime | date: "shortTime"}} - {{speaker.ftime | date: "shortTime"}}</h6>
+					<h5><strong>Location</strong></h5>
+					<h6>{{speaker.location}}</h6>
+					<h5><strong>title</strong></h5>
+					<h6>{{speaker.title}}</h6>
+				</accordion-group>
+			</accordion>
+		</div>
+	</div>
+</div>

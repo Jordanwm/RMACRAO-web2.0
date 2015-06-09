@@ -1,0 +1,38 @@
+<div class="alert alert-warning" ng-show="years.length == 0">
+	You must create a year before you can add exhibitors.
+</div>
+<div ng-hide="years.length == 0">
+	<div class="page-header">
+		<h4>
+			<div class="btn btn-default pull-right" ng-click="addExhibitor()"><i class="glyphicon glyphicon-plus"></i> Add a New Exhibitor</div>
+			Exhibitors
+		</h4>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div ng-show="exhibitors.length == 0" class="alert alert-info">Please add an exhibitor</div>
+			<alert ng-show="info && exhibitors.length > 0" type="info" close="closeInfo()">{{info}}</alert>
+			<accordion close-other="oneAtATime">
+				<accordion-group ng-repeat="exhibitor in exhibitors" heading="{{exhibitor.name}}">
+					<div class="pull-right btn-group">
+						<div class="btn btn-default" ng-click="editExhibitor(exhibitor)">Edit <i class="glyphicon glyphicon-edit"></i></div>
+						<div class="btn btn-danger" ng-click="deleteExhibitor(exhibitor)"><i class="glyphicon glyphicon-trash"></i></div>
+					</div>
+					<h5><strong>Description</strong></h5>
+					<h6 style="white-space:pre-wrap;">{{exhibitor.description}}</h6>
+					<h5><strong>Address</strong></h5>
+					<h6>
+						{{exhibitor.address}} <br>
+						{{exhibitor.city}}, {{exhibitor.state}} {{exhibitor.zip}}
+					</h6>
+					<div ng-show="exhibitor.staff.length > 0">
+						<h5><strong>Staff Members</strong></h5>
+						<ul class="list-unstyled">
+							<li class="h6" ng-repeat="staff in exhibitor.staff">{{staff.name}}, {{staff.title}}</li>
+						</ul>
+					</div>
+				</accordion-group>
+			</accordion>
+		</div>
+	</div>
+</div>

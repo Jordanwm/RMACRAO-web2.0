@@ -1,0 +1,90 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="cancel()">&times;</button>
+	<h4 ng-show="edit" class="modal-title">Modify Exhibitor</h4>
+	<h4 ng-hide="edit" class="modal-title">Add a Exhibitor</h4>
+</div>
+<div class="modal-body">
+	<div class="row">
+		<form class="col-md-8" name="exhibitorForm" novalidate>
+			<div class="form-group" ng-class="{'has-error':exhibitorForm.name.$invalid && exhibitorForm.name.$touched}">
+				<label>Name<span class="small">*</span></label>
+				<input type="text" class="form-control" placeholder="Company Inc." ng-model="exhibitor.name" name="name" required autocomplete="off">
+				<p class="help-block" ng-show="exhibitorForm.name.$invalid && exhibitorForm.name.$touched">Name is a required field</p>
+			</div>
+			<div class="form-group" ng-class="{'has-error':exhibitorForm.description.$invalid && exhibitorForm.description.$touched}">
+				<label>Description<span class="small">*</span></label>
+				<textarea ng-model="exhibitor.description" rows="4" class="form-control" placeholder="Enter the company's description here. Copy and paste will preserve formatting like indentation and paragraphs." name="description" required></textarea>
+				<p class="help-block" ng-show="exhibitorForm.description.$invalid && exhibitorForm.description.$touched">Description is a required field</p>
+			</div>
+			<div class="form-group" ng-class="{'has-error':exhibitorForm.address.$invalid && exhibitorForm.address.$touched}">
+				<label>Address<span class="small">*</span></label>
+				<div class="input-group">
+					<span class="input-group-addon">Street:</span>
+					<input type="text" ng-model="exhibitor.address" placeholder="123 1st St." class="form-control" name="address" required autocompete="off">
+				</div>
+				<p class="help-block" ng-show="exhibitorForm.address.$invalid && exhibitorForm.address.$touched">Address is a required field</p>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-5" ng-class="{'has-error':exhibitorForm.city.$invalid && exhibitorForm.city.$touched}">
+						<div class="input-group">
+							<span class="input-group-addon">City:</span>
+							<input type="text" ng-model="exhibitor.city" placeholder="Somewhere" class="form-control" name="city" required autocompete="off">
+						</div>
+						<p class="help-block" ng-show="exhibitorForm.city.$invalid && exhibitorForm.city.$touched">City is required</p>
+					</div>
+					<div class="col-xs-4">
+						<div class="input-group">
+							<span class="input-group-addon">State:</span>
+							<select ng-model="exhibitor.state" class="form-control" ng-init="exhibitor.state='CO'"ng-options="state for state in states"></select>
+						</div>
+					</div>
+					<div class="col-xs-3" ng-class="{'has-error': exhibitorForm.zip.$invalid && exhibitorForm.zip.$touched}">
+						<div class="input-group">
+							<span class="input-group-addon">Zip:</span>
+							<input type="text" ng-model="exhibitor.zip" placeholder="12345" class="form-control" name="zip" required autocompete="off">
+						</div>
+						<p class="help-block" ng-show="exhibitorForm.zip.$invalid && exhibitorForm.zip.$touched">Zip in required</p>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="col-md-4">
+			<p>
+				<strong>Staff Members:</strong>
+				<span class="btn btn-default btn-xs pull-right" ng-click="addStaff()"><i class="glyphicon glyphicon-plus"></i></span>
+			</p>
+			<ul ng-show="exhibitor.staff.length > 0" class="list-group">
+				<li ng-repeat="staf in exhibitor.staff" class="list-group-item">
+					<p class="h6">
+						{{staf.name}}, {{staf.title}}
+						<span class="pull-right">
+							<span class="btn btn-xs btn-warning" ng-click="editStaff(staf)"><i class="glyphicon-edit glyphicon"></i></span>
+							<span class="btn btn-xs btn-danger" ng-click="removeStaff(staf)"><i class="glyphicon-trash glyphicon"></i></span> 
+						</span>
+					</p>
+				</li>
+			</ul>
+			<div class="well" ng-show="addEditS">
+				<form ng-show="addEditS" name="staffForm" novalidate>
+					<button type="button" class="close" ng-click="closeS()">&times;</button>
+					<div class="form-group" ng-class="{'has-error':staffForm.name.$invalid && staffForm.name.$touched}">
+						<label>Staff Member Name<span class="small">*</span></label>
+						<input type="text" class="form-control" ng-model="staff.name" name="name" required autocomplete="off">
+						<p class="help-block" ng-show="staffForm.name.$invalid && staffForm.name.$touched">Name is a required field</p>
+					</div>
+					<div class="form-group" ng-class="{'has-error': staffForm.title.$invalid && staffForm.title.$touched}">
+						<label>Staff Member Position/Title<span class="small">*</span></label>
+						<input type="text" class="form-control" ng-model="staff.title" name="title" required autocomplete="off">
+						<p class="help-block" ng-show="staffForm.title.$invalid && staffForm.title.$touched">Title is a required field</p>
+					</div>
+					<button class="btn btn-primary btn-xs" ng-click="submitStaff()" ng-disabled="staffForm.$invalid">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()" ng-disabled="exhibitorForm.$invalid">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
