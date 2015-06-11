@@ -39,8 +39,52 @@ angular.module('app.services', [])
 		});
 	};
 	o.getAll = function(){
-		$http.get('/api/years').then(function(res){
+		return $http.get('/api/years').then(function(res){
 			o.years = res.data;
+		});
+	};
+	return o;
+})
+
+.factory('Maps', function($http){
+	var o = {}
+	o.maps = [];
+	o.createMap = function(map){
+		$http.post('/api/maps', map, {
+			withCredentials: true,
+			headers: {'Content-Type': undefined },
+			transformRequest: angular.identity
+		}).then(function(res){
+			o.maps.push(res.data);
+		});
+	};
+	o.updateMap = function(map, id){
+		$http.post('/api/maps/' + id, map, {
+			withCredentials: true,
+			headers: {'Content-Type': undefined },
+			transformRequest: angular.identity
+		}).then(function(res){
+			o.maps.forEach(function(m, i){
+				if (m.id == res.data.id) {
+					console.log(m)
+					o.maps[i] = res.data
+					console.log(o.maps[i])
+				}
+			});
+		});
+	};
+	o.deleteMap = function(map){
+		$http.delete('/api/maps/' + map.id).then(function(res){
+			o.maps.forEach(function(m, i){
+				if (m.id == res.data.id){
+					o.maps.splice(i,1);
+				}
+			});
+		});
+	};
+	o.getAll = function(){
+		return $http.get('/api/maps').then(function(res){
+			o.maps = res.data;
 		});
 	};
 	return o;

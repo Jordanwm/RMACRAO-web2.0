@@ -23,3 +23,10 @@ a {
     cursor:pointer;
     display: block;
 }
+.logo {
+    max-width:200px;
+    max-height:200px;
+}
+.map {
+    max-width: 100%;
+}

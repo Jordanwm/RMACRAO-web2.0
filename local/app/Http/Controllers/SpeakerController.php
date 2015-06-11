@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Year;
 use App\Speaker;
 
+use File;
+
 class SpeakerController extends Controller {
 
 	private function activeYear() {
@@ -60,8 +62,12 @@ class SpeakerController extends Controller {
 	public function storeImage(Request $request) {
 		//Image uploading
 		$speaker = Speaker::find($request->input('id'));
+
+		if ($speaker->img_path) {
+			File::delete(public_path() . $speaker->img_path);
+		}
 		
-		$imageName = 'speaker_' . $speaker->id . '.' . $request->file('image')->getClientOriginalExtension();
+		$imageName = 'speaker_' . $speaker->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
 
 		$request->file('image')->move(base_path() . '/public/images/uploads/', $imageName);
 		$speaker->img_path = '/images/uploads/' . $imageName;
@@ -95,6 +101,9 @@ class SpeakerController extends Controller {
 	public function destroy($id)
 	{
 		$speaker = Speaker::findOrFail($id);
+		if ($speaker->img_path){
+			File::delete(public_path() . $speaker->img_path);
+		}
 		$speaker->delete();
 
 		return $speaker;

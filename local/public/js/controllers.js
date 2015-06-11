@@ -75,6 +75,74 @@ angular.module('app.controllers', ['app.services'])
 	};
 })
 
+.controller('MapsMainCtrl', function($scope, $modal, Years, Maps){
+	$scope.years = Years.years;
+	$scope.maps = Maps.maps;
+	$scope.edit = true;
+
+	$scope.addMap = function(){
+		$scope.edit = false;
+		$scope.name = "";
+		$scope.img = false;
+		$scope.image = "";
+
+		var modalInstance = $modal.open({
+			animation: true,
+			templateUrl: 'templates/mapModal.html',
+			controller: 'MapCtrl',
+			scope: $scope,
+			size: 'lg'
+		});
+
+		modalInstance.result.then(function(fd){
+			Maps.createMap(fd);
+		});
+	};
+	$scope.editMap = function(map){
+		$scope.name = angular.copy(map.name);
+		$scope.img = true;
+		$scope.image = angular.copy(map.img_path);
+		$scope.edit = true;
+
+		var modalInstance = $modal.open({
+			animation: true,
+			templateUrl: 'templates/mapModal.html',
+			controller: 'MapCtrl',
+			scope: $scope,
+			size: 'lg'
+		});
+
+		modalInstance.result.then(function(m){
+			Maps.updateMap(m, map.id);
+		});
+	};
+	$scope.deleteMap = function(map){
+		if (confirm("Are you sure you want to delete " + map.name + "?")){
+			Maps.deleteMap(map);
+		}
+	};
+
+	$scope.info = "Click on a name to display its information."
+	$scope.closeInfo = function() {
+		$scope.info = null;
+	};
+})
+
+.controller('MapCtrl', function($scope, $modalInstance){
+	$scope.fd = new FormData();
+
+	$scope.uploadFile = function(files){
+		$scope.fd.append('image',files[0]);
+	}
+	$scope.ok = function(){
+		$scope.fd.append('name', $scope.name);
+		$modalInstance.close($scope.fd)
+	};
+	$scope.cancel = function(){
+		$modalInstance.dismiss('cancel')
+	};
+})
+
 .controller('SessionsMainCtrl', function($scope, $modal, $modalStack, $filter, Sessions, Years){
 	$scope.years = Years.years;
 	$scope.days = Sessions.days;

@@ -45,7 +45,7 @@
 								<input type="file" name="image" onchange="angular.element(this).scope().uploadFile(this.files, angular.element(this).scope().exhibitor.id);">
 							</span>
 							<h5><strong>Exhibitor Logo:</strong></h5>
-							<img ng-src="{{exhibitor.img_path}}" ng-show="exhibitor.img_path">
+							<img class="logo" ng-src="{{exhibitor.img_path}}" ng-show="exhibitor.img_path">
 						</div>
 					</div>
 				</accordion-group>

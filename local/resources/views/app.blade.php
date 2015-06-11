@@ -24,6 +24,7 @@
 				<ul class="nav navbar-nav">
 					<li><a ui-sref="home">Home</a></li>
 					<li><a ui-sref="years">Years</a></li>
+					<li><a ui-sref="maps">Maps</a></li>
 					<li><a ui-sref="sessions">Sessions</a></li>
 					<li><a ui-sref="speakers">Speakers</a></li>
 					<li><a ui-sref="exhibitors">Exhibitors</a></li>

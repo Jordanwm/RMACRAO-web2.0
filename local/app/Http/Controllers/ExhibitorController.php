@@ -9,6 +9,8 @@ use App\Year;
 use App\Exhibitor;
 use App\Staff;
 
+use File;
+
 class ExhibitorController extends Controller {
 
 	private function activeYear() {
@@ -68,8 +70,12 @@ class ExhibitorController extends Controller {
 	public function storeImage(Request $request) {
 			//Image uploading
 			$exhibitor = Exhibitor::find($request->input('id'));
+
+			if ($exhibitor->img_path) {
+				File::delete(public_path() . $exhibitor->img_path);
+			}
 			
-			$imageName = 'exhibitor_' . $exhibitor->id . '.' . $request->file('image')->getClientOriginalExtension();
+			$imageName = 'exhibitor_' . $exhibitor->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
 
 			$request->file('image')->move(base_path() . '/public/images/uploads/', $imageName);
 			$exhibitor->img_path = '/images/uploads/' . $imageName;
@@ -134,6 +140,9 @@ class ExhibitorController extends Controller {
 	public function destroy($id)
 	{
 		$exhibitor = Exhibitor::findOrFail($id);
+		if ($exhibitor->img_path) {
+			File::delete(public_path() . $exhibitor->img_path);
+		}
 		$exhibitor->staff()->delete();
 		$exhibitor->delete();
 
