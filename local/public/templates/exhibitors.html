@@ -18,6 +18,8 @@
 						<div class="btn btn-default" ng-click="editExhibitor(exhibitor)">Edit <i class="glyphicon glyphicon-edit"></i></div>
 						<div class="btn btn-danger" ng-click="deleteExhibitor(exhibitor)"><i class="glyphicon glyphicon-trash"></i></div>
 					</div>
+					<h5><strong>Website</strong></h5>
+					<h6 ng-show="exhibitor.website">{{exhibitor.website}}</h6>
 					<h5><strong>Description</strong></h5>
 					<h6 style="white-space:pre-wrap;">{{exhibitor.description}}</h6>
 					<h5><strong>Address</strong></h5>

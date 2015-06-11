@@ -11,6 +11,10 @@
 				<input type="text" class="form-control" placeholder="Company Inc." ng-model="exhibitor.name" name="name" required autocomplete="off">
 				<p class="help-block" ng-show="exhibitorForm.name.$invalid && exhibitorForm.name.$touched">Name is a required field</p>
 			</div>
+			<div class="form-group">
+				<label>Website</label>
+				<input type="text" class="form-control" placeholder="http://www.example.com" ng-model="exhibitor.website" autocomplete="off">
+			</div>
 			<div class="form-group" ng-class="{'has-error':exhibitorForm.description.$invalid && exhibitorForm.description.$touched}">
 				<label>Description<span class="small">*</span></label>
 				<textarea ng-model="exhibitor.description" rows="4" class="form-control" placeholder="Enter the company's description here. Copy and paste will preserve formatting like indentation and paragraphs." name="description" required></textarea>
@@ -73,10 +77,9 @@
 						<input type="text" class="form-control" ng-model="staff.name" name="name" required autocomplete="off">
 						<p class="help-block" ng-show="staffForm.name.$invalid && staffForm.name.$touched">Name is a required field</p>
 					</div>
-					<div class="form-group" ng-class="{'has-error': staffForm.title.$invalid && staffForm.title.$touched}">
-						<label>Staff Member Position/Title<span class="small">*</span></label>
-						<input type="text" class="form-control" ng-model="staff.title" name="title" required autocomplete="off">
-						<p class="help-block" ng-show="staffForm.title.$invalid && staffForm.title.$touched">Title is a required field</p>
+					<div class="form-group">
+						<label>Staff Member Position/Title</label>
+						<input type="text" class="form-control" ng-model="staff.title" autocomplete="off">
 					</div>
 					<button class="btn btn-primary btn-xs" ng-click="submitStaff()" ng-disabled="staffForm.$invalid">Submit</button>
 				</form>
