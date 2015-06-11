@@ -61,7 +61,7 @@ class SpeakerController extends Controller {
 		//Image uploading
 		$speaker = Speaker::find($request->input('id'));
 		
-		$imageName = 'speaker' . $speaker->id . '.' . $request->file('image')->getClientOriginalExtension();
+		$imageName = 'speaker_' . $speaker->id . '.' . $request->file('image')->getClientOriginalExtension();
 
 		$request->file('image')->move(base_path() . '/public/images/uploads/', $imageName);
 		$speaker->img_path = '/images/uploads/' . $imageName;

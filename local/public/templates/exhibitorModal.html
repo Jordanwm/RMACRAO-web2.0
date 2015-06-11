@@ -61,7 +61,7 @@
 			<ul ng-show="exhibitor.staff.length > 0" class="list-group">
 				<li ng-repeat="staf in exhibitor.staff" class="list-group-item">
 					<p class="h6">
-						{{staf.name}}, {{staf.title}}
+						{{staf.name}}<span ng-show="staf.title">, </span>{{staf.title}}
 						<span class="pull-right">
 							<span class="btn btn-xs btn-warning" ng-click="editStaff(staf)"><i class="glyphicon-edit glyphicon"></i></span>
 							<span class="btn btn-xs btn-danger" ng-click="removeStaff(staf)"><i class="glyphicon-trash glyphicon"></i></span> 

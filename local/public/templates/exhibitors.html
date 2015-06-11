@@ -14,33 +14,40 @@
 			<alert ng-show="info && exhibitors.length > 0" type="info" close="closeInfo()">{{info}}</alert>
 			<accordion close-other="oneAtATime">
 				<accordion-group ng-repeat="exhibitor in exhibitors" heading="{{exhibitor.name}}">
-					<div class="pull-right btn-group">
-						<div class="btn btn-default" ng-click="editExhibitor(exhibitor)">Edit <i class="glyphicon glyphicon-edit"></i></div>
-						<div class="btn btn-danger" ng-click="deleteExhibitor(exhibitor)"><i class="glyphicon glyphicon-trash"></i></div>
+					<div class="row">
+						<div class="col-sm-6">
+							<h5><strong>Website</strong></h5>
+							<h6 ng-show="exhibitor.website"><a href="{{exhibitor.website}}" target="_blank">{{exhibitor.website}}</a></h6>
+							<h5><strong>Description</strong></h5>
+							<h6 style="white-space:pre-wrap;">{{exhibitor.description}}</h6>
+							<h5><strong>Address</strong></h5>
+							<h6>
+								{{exhibitor.address}} <br>
+								{{exhibitor.city}}, {{exhibitor.state}} {{exhibitor.zip}}
+							</h6>
+							<div ng-show="exhibitor.staff.length > 0">
+								<h5><strong>Staff Members</strong></h5>
+								<ul class="list-unstyled">
+									<li class="h6" ng-repeat="staff in exhibitor.staff">{{staff.name}}<span ng-show="staff.title">, </span>{{staff.title}}</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="text-right">
+								<div class="btn-group">
+									<div class="btn btn-default" ng-click="editExhibitor(exhibitor)">Edit <i class="glyphicon glyphicon-edit"></i></div>
+									<div class="btn btn-danger" ng-click="deleteExhibitor(exhibitor)"><i class="glyphicon glyphicon-trash"></i></div>
+								</div>
+							</div>
+							<hr>
+							<span class="btn btn-default btn-file pull-right">
+								Upload Logo
+								<input type="file" name="image" onchange="angular.element(this).scope().uploadFile(this.files, angular.element(this).scope().exhibitor.id);">
+							</span>
+							<h5><strong>Exhibitor Logo:</strong></h5>
+							<img ng-src="{{exhibitor.img_path}}" ng-show="exhibitor.img_path">
+						</div>
 					</div>
-					<h5><strong>Website</strong></h5>
-					<h6 ng-show="exhibitor.website">{{exhibitor.website}}</h6>
-					<h5><strong>Description</strong></h5>
-					<h6 style="white-space:pre-wrap;">{{exhibitor.description}}</h6>
-					<h5><strong>Address</strong></h5>
-					<h6>
-						{{exhibitor.address}} <br>
-						{{exhibitor.city}}, {{exhibitor.state}} {{exhibitor.zip}}
-					</h6>
-					<div ng-show="exhibitor.staff.length > 0">
-						<h5><strong>Staff Members</strong></h5>
-						<ul class="list-unstyled">
-							<li class="h6" ng-repeat="staff in exhibitor.staff">{{staff.name}}, {{staff.title}}</li>
-						</ul>
-					</div>
-					<div class="form-group">
-						<label>Exhibitor Logo:</label>
-						<span class="btn btn-default btn-file pull-right">
-							Upload Logo
-							<input type="file" name="image" onchange="angular.element(this).scope().uploadFile(this.files, angular.element(this).scope().exhibitor.id);">
-						</span>
-					</div>
-					<img ng-src="{{exhibitor.img_path}}" ng-show="exhibitor.img_path">
 				</accordion-group>
 			</accordion>
 		</div>

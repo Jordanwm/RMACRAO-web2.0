@@ -24,7 +24,7 @@
 							<h6>{{speaker.stime | date: "shortTime"}} - {{speaker.ftime | date: "shortTime"}}</h6>
 							<h5><strong>Location</strong></h5>
 							<h6>{{speaker.location}}</h6>
-							<h5><strong>title</strong></h5>
+							<h5><strong>Title</strong></h5>
 							<h6>{{speaker.title}}</h6>
 						</div>
 						<div class="col-sm-6">
@@ -40,7 +40,7 @@
 									Upload Photo
 									<input type="file" name="image" onchange="angular.element(this).scope().uploadFile(this.files, angular.element(this).scope().speaker.id);">
 								</span>
-								<h5><strong>Speakers Photo:</strong></h5>
+								<h5><strong>Speaker's Photo:</strong></h5>
 								<img ng-src="{{speaker.img_path}}" ng-show="speaker.img_path">
 							</div>
 						</div>
