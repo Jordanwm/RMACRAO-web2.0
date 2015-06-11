@@ -17,6 +17,7 @@ class CreateSpeakersTable extends Migration {
 			$table->increments('id');
 			$table->integer('year_id');
 			$table->string('name');
+			$table->string('img_path')->nullable();
 			$table->string('session')->nullable();
 			$table->string('day');
 			$table->string('stime');

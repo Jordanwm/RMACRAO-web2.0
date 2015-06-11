@@ -1,3 +1,13 @@
+function uploadFile(files, id, cb){
+	var fd = new FormData();
+
+	fd.append("id", id);
+	fd.append("image", files[0]);
+
+	cb(fd);
+};
+
+
 angular.module('app.controllers', ['app.services'])
 
 .controller('YearsMainCtrl', function($scope, $modal, Years){
@@ -391,6 +401,12 @@ angular.module('app.controllers', ['app.services'])
 		}
 	};
 
+	$scope.uploadFile = function(files, id){
+		uploadFile(files, id, function(fd){
+			Speakers.uploadImage(fd);
+		});
+	};
+
 	$scope.info = "Click on a name to display their information."
 	$scope.closeInfo = function() {
 		$scope.info = null;
@@ -460,12 +476,9 @@ angular.module('app.controllers', ['app.services'])
 	};
 
 	$scope.uploadFile = function(files, id){
-		var fd = new FormData();
-
-		fd.append("exhibitor", id);
-		fd.append("image", files[0]);
-
-		Exhibitors.uploadImage(fd);
+		uploadFile(files, id, function(fd){
+			Exhibitors.uploadImage(fd);
+		});
 	};
 
 	$scope.info = "Click on a name to display their information."

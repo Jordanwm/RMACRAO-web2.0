@@ -8,7 +8,7 @@ class Speaker extends Model {
 		return $this->belongsTo('App\Year');
 	}
 
-	public $fillable = ['name', 'session', 'day', 'stime', 'ftime', 'location', 'title'];
+	public $fillable = ['name', 'session', 'day', 'stime', 'ftime', 'location', 'title', 'img_path'];
 	
 	public $timestamps = false;
 

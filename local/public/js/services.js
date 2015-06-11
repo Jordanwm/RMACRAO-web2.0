@@ -151,6 +151,19 @@ angular.module('app.services', [])
 			});
 		});
 	};
+	o.uploadImage = function(fd){
+		$http.post('/api/speakers/image', fd, {
+			withCredentials: true,
+			headers: {'Content-Type': undefined },
+			transformRequest: angular.identity
+		}).then(function(res){
+			o.speakers.forEach(function(s, i){
+				if (s.id == res.data.id){
+					o.speakers[i] = res.data;
+				}
+			})
+		});
+	};
 	o.deleteSpeaker = function(speaker){
 		$http.delete('/api/speakers/' + speaker.id).then(function(res){
 			o.speakers.forEach(function(s, i){

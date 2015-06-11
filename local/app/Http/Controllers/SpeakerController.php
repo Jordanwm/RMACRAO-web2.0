@@ -57,6 +57,20 @@ class SpeakerController extends Controller {
 		}
 	}
 
+	public function storeImage(Request $request) {
+		//Image uploading
+		$speaker = Speaker::find($request->input('id'));
+		
+		$imageName = 'speaker' . $speaker->id . '.' . $request->file('image')->getClientOriginalExtension();
+
+		$request->file('image')->move(base_path() . '/public/images/uploads/', $imageName);
+		$speaker->img_path = '/images/uploads/' . $imageName;
+
+		$speaker->save();
+
+		return json_encode($this->getSpeaker($speaker->id));
+	}
+
 	/**
 	 * Update the specified resource in storage.
 	 *

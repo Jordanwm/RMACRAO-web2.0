@@ -67,7 +67,7 @@ class ExhibitorController extends Controller {
 
 	public function storeImage(Request $request) {
 			//Image uploading
-			$exhibitor = Exhibitor::find($request->input('exhibitor'));
+			$exhibitor = Exhibitor::find($request->input('id'));
 			
 			$imageName = 'exhibitor_' . $exhibitor->id . '.' . $request->file('image')->getClientOriginalExtension();
 

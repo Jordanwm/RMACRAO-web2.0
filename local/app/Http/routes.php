@@ -56,6 +56,7 @@ Route::group(['prefix'=>'api', 'middleware'=>'auth'], function(){
 
 	//SPEAKERS CONTROLLER
 	Route::Post('/speakers', 'SpeakerController@store');
+	Route::Post('/speakers/image', 'SpeakerController@storeImage');
 	Route::Put('/speakers/{id}', 'SpeakerController@update');
 	Route::Delete('/speakers/{id}', 'SpeakerController@destroy');
 
