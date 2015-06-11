@@ -12,7 +12,7 @@ class Exhibitor extends Model {
 		return $this->belongsTo('App\Year');
 	}
 
-	protected $fillable = ['name', 'address', 'city', 'state', 'zip', 'description'];
+	protected $fillable = ['name', 'address', 'city', 'state', 'zip', 'description', 'website', 'img_path'];
 		
 	public $timestamps = false;
 

@@ -1,3 +1,13 @@
+function uploadFile(files, id, cb){
+	var fd = new FormData();
+
+	fd.append("id", id);
+	fd.append("image", files[0]);
+
+	cb(fd);
+};
+
+
 angular.module('app.controllers', ['app.services'])
 
 .controller('YearsMainCtrl', function($scope, $modal, Years){
@@ -59,6 +69,74 @@ angular.module('app.controllers', ['app.services'])
 
 	$scope.ok = function(){
 		$modalInstance.close($scope.year)
+	};
+	$scope.cancel = function(){
+		$modalInstance.dismiss('cancel')
+	};
+})
+
+.controller('MapsMainCtrl', function($scope, $modal, Years, Maps){
+	$scope.years = Years.years;
+	$scope.maps = Maps.maps;
+	$scope.edit = true;
+
+	$scope.addMap = function(){
+		$scope.edit = false;
+		$scope.name = "";
+		$scope.img = false;
+		$scope.image = "";
+
+		var modalInstance = $modal.open({
+			animation: true,
+			templateUrl: 'templates/mapModal.html',
+			controller: 'MapCtrl',
+			scope: $scope,
+			size: 'lg'
+		});
+
+		modalInstance.result.then(function(fd){
+			Maps.createMap(fd);
+		});
+	};
+	$scope.editMap = function(map){
+		$scope.name = angular.copy(map.name);
+		$scope.img = true;
+		$scope.image = angular.copy(map.img_path);
+		$scope.edit = true;
+
+		var modalInstance = $modal.open({
+			animation: true,
+			templateUrl: 'templates/mapModal.html',
+			controller: 'MapCtrl',
+			scope: $scope,
+			size: 'lg'
+		});
+
+		modalInstance.result.then(function(m){
+			Maps.updateMap(m, map.id);
+		});
+	};
+	$scope.deleteMap = function(map){
+		if (confirm("Are you sure you want to delete " + map.name + "?")){
+			Maps.deleteMap(map);
+		}
+	};
+
+	$scope.info = "Click on a name to display its information."
+	$scope.closeInfo = function() {
+		$scope.info = null;
+	};
+})
+
+.controller('MapCtrl', function($scope, $modalInstance){
+	$scope.fd = new FormData();
+
+	$scope.uploadFile = function(files){
+		$scope.fd.append('image',files[0]);
+	}
+	$scope.ok = function(){
+		$scope.fd.append('name', $scope.name);
+		$modalInstance.close($scope.fd)
 	};
 	$scope.cancel = function(){
 		$modalInstance.dismiss('cancel')
@@ -391,6 +469,12 @@ angular.module('app.controllers', ['app.services'])
 		}
 	};
 
+	$scope.uploadFile = function(files, id){
+		uploadFile(files, id, function(fd){
+			Speakers.uploadImage(fd);
+		});
+	};
+
 	$scope.info = "Click on a name to display their information."
 	$scope.closeInfo = function() {
 		$scope.info = null;
@@ -457,6 +541,12 @@ angular.module('app.controllers', ['app.services'])
 		if (confirm("Are you sure you want to delete " + exhibitor.name + "?")){
 			Exhibitors.deleteExhibitor(exhibitor);
 		}
+	};
+
+	$scope.uploadFile = function(files, id){
+		uploadFile(files, id, function(fd){
+			Exhibitors.uploadImage(fd);
+		});
 	};
 
 	$scope.info = "Click on a name to display their information."

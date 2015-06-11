@@ -47,5 +47,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					return Exhibitors.getAll();
 				}
 			}
+		})
+		.state('maps', {
+			url: "/maps",
+			controller: "MapsMainCtrl",
+			templateUrl: "templates/maps.html",
+			resolve: {
+				mapsPromise: function(Maps){
+					return Maps.getAll();
+				}
+			}
 		});
 });

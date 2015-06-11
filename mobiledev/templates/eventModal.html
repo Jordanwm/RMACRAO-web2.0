@@ -20,6 +20,10 @@
 				<textarea class="form-control" rows="7" placeholder="Enter the description here. Copy and paste will preserve formatting like indentation and paragraphs." ng-model="event.description"></textarea>
 			</div>
 			<div class="form-group">
+				<label>Event Survey</label>
+				<input type="text" class="form-control" placeholder="http://google.com" ng-model="event.survey" autocomplete="off">
+			</div>
+			<div class="form-group">
 				<label>Event Sponser</label>
 				<input type="text" class="form-control" placeholder="Company Inc" ng-model="event.sponser" autocomplete="off">
 			</div>
@@ -37,7 +41,7 @@
 			<ul ng-show="event.presenters.length > 0" class="list-group">
 				<li ng-repeat="presenter in event.presenters" class="list-group-item">
 					<p class="h6">
-						{{presenter.name}}, {{presenter.title}}
+						{{presenter.name}}<span ng-show="presenter.title">, </span>{{presenter.title}}
 						<span class="pull-right">
 							<span class="btn btn-xs btn-warning"><i class="glyphicon-edit glyphicon" ng-click="editPresenter(presenter)"></i></span>
 							<span class="btn btn-xs btn-danger" ng-click="removePresenter(presenter)"><i class="glyphicon-trash glyphicon"></i></span> 
@@ -52,7 +56,7 @@
 			<ul ng-show="event.facilitators.length > 0" class="list-group">
 				<li ng-repeat="facilitator in event.facilitators" class="list-group-item">
 					<p class="h6">
-						{{facilitator.name}}, {{facilitator.title}}
+						{{facilitator.name}}<span ng-show="facilitator.title">, </span>{{facilitator.title}}
 						<span class="pull-right">
 							<span class="btn btn-xs btn-warning" ng-click="editFacilitator(facilitator)"><i class="glyphicon-edit glyphicon"></i></span>
 							<span class="btn btn-xs btn-danger" ng-click="removeFacilitator(facilitator)"><i class="glyphicon-trash glyphicon"></i></span> 
@@ -68,10 +72,9 @@
 						<input type="text" class="form-control" ng-model="presenter.name" name="name" placeholder="John Doe" required autocomplete="off">
 						<p class="help-block" ng-show="presenterForm.name.$invalid && presenterForm.name.$touched">Name is a required field</p>
 					</div>
-					<div class="form-group" ng-class="{'has-error': presenterForm.title.$invalid && presenterForm.title.$touched}">
-						<label>Presenter School/Position<span class="small">*</span></label>
-						<input type="text" class="form-control" ng-model="presenter.title" name="title" placeholder="CEO" required autocomplete="off">
-						<p class="help-block" ng-show="presenterForm.title.$invalid && presenterForm.title.$touched">Title is a required field</p>
+					<div class="form-group">
+						<label>Presenter School/Position</label>
+						<input type="text" class="form-control" ng-model="presenter.title" placeholder="CEO" autocomplete="off">
 					</div>
 					<button class="btn btn-primary btn-xs" ng-click="submitPresenter()" ng-disabled="presenterForm.$invalid">Submit</button>
 				</form>
@@ -82,10 +85,9 @@
 						<input type="text" class="form-control" ng-model="facilitator.name" name="name" placeholder="John Doe" required autocomplete="off">
 						<p class="help-block" ng-show="facilitatorForm.name.$invalid && facilitatorForm.name.$touched">Name is a required field</p>
 					</div>
-					<div class="form-group" ng-class="{'has-error': facilitatorForm.title.$invalid && facilitatorForm.title.$touched}">
-						<label>Facilitator School/Position<span class="small">*</span></label>
-						<input type="text" class="form-control" ng-model="facilitator.title" name="title" placeholder="CEO" required autocomplete="off">
-						<p class="help-block" ng-show="facilitatorForm.title.$invalid && facilitatorForm.title.$touched">Title is a required field</p>
+					<div class="form-group">
+						<label>Facilitator School/Position</label>
+						<input type="text" class="form-control" ng-model="facilitator.title" placeholder="CEO" autocomplete="off">
 					</div>
 					<button class="btn btn-primary btn-xs" ng-click="submitFacilitator()" ng-disabled="facilitatorForm.$invalid">Submit</button>
 				</form>

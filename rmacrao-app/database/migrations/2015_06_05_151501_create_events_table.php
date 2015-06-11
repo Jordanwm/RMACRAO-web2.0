@@ -19,6 +19,7 @@ class CreateEventsTable extends Migration {
 			$table->string('title');
 			$table->string('sid')->nullable();
 			$table->text('description')->nullable();
+			$table->string('survey')->nullable();
 			$table->string('sponser')->nullable();
 			$table->string('location');
 		});

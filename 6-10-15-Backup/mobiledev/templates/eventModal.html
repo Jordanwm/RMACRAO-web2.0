@@ -1,0 +1,100 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="cancel()">&times;</button>
+	<h4 ng-show="edit" class="modal-title">Modify Event</h4>
+	<h4 ng-hide="edit" class="modal-title">Add an Event</h4>
+</div>
+<div class="modal-body">
+	<div class="row">
+		<form class="col-md-8" name="eventForm" novalidate>
+			<div class="form-group" ng-class="{'has-error': eventForm.title.$invalid && eventForm.title.$touched}">
+				<label>Event Title<span class="small">*</span></label>
+				<input type="text" name="title" class="form-control" ng-model="event.title" placeholder="Registration Open" required autocomplete="off">
+				<p class="help-block" ng-show="eventForm.title.$invalid && eventForm.title.$touched">Title is a required field</p>
+			</div>
+			<div class="form-group">
+				<label>Event Session ID</label>
+				<input type="text" class="form-control" ng-model="event.sid" placeholder="1A" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<label>Event Description</label>
+				<textarea class="form-control" rows="7" placeholder="Enter the description here. Copy and paste will preserve formatting like indentation and paragraphs." ng-model="event.description"></textarea>
+			</div>
+			<div class="form-group">
+				<label>Event Sponser</label>
+				<input type="text" class="form-control" placeholder="Company Inc" ng-model="event.sponser" autocomplete="off">
+			</div>
+			<div class="form-group" ng-class="{'has-error':eventForm.location.$invalid && eventForm.location.$touched}">
+				<label>Event Location<span class="small">*</span></label>
+				<input type="text" class="form-control" name="location" placeholder="Ballroom" ng-model="event.location" required autocomplete="off">
+				<p class="help-block" ng-show="eventForm.location.$invalid && eventForm.location.$touched">Location is a required field</p>
+			</div>
+		</form>
+		<div class="col-md-4">
+			<p>
+				<strong>Presenters:</strong>
+				<span class="btn btn-default btn-xs pull-right" ng-click="addPresenter()"><i class="glyphicon glyphicon-plus"></i></span>
+			</p>
+			<ul ng-show="event.presenters.length > 0" class="list-group">
+				<li ng-repeat="presenter in event.presenters" class="list-group-item">
+					<p class="h6">
+						{{presenter.name}}, {{presenter.title}}
+						<span class="pull-right">
+							<span class="btn btn-xs btn-warning"><i class="glyphicon-edit glyphicon" ng-click="editPresenter(presenter)"></i></span>
+							<span class="btn btn-xs btn-danger" ng-click="removePresenter(presenter)"><i class="glyphicon-trash glyphicon"></i></span> 
+						</span>
+					</p>
+				</li>
+			</ul>
+			<p>
+				<strong>Facilitators:</strong>
+				<span class="btn btn-default btn-xs pull-right" ng-click="addFacilitator()"><i class="glyphicon glyphicon-plus"></i></span>
+			</p>
+			<ul ng-show="event.facilitators.length > 0" class="list-group">
+				<li ng-repeat="facilitator in event.facilitators" class="list-group-item">
+					<p class="h6">
+						{{facilitator.name}}, {{facilitator.title}}
+						<span class="pull-right">
+							<span class="btn btn-xs btn-warning" ng-click="editFacilitator(facilitator)"><i class="glyphicon-edit glyphicon"></i></span>
+							<span class="btn btn-xs btn-danger" ng-click="removeFacilitator(facilitator)"><i class="glyphicon-trash glyphicon"></i></span> 
+						</span>
+					</p>
+				</li>
+			</ul>
+			<div class="well" ng-show="addEditP || addEditF">
+				<form ng-show="addEditP" name="presenterForm" novalidate>
+					<button type="button" class="close" ng-click="closeP()">&times;</button>
+					<div class="form-group" ng-class="{'has-error':presenterForm.name.$invalid && presenterForm.name.$touched}">
+						<label>Presenter Name<span class="small">*</span></label>
+						<input type="text" class="form-control" ng-model="presenter.name" name="name" placeholder="John Doe" required autocomplete="off">
+						<p class="help-block" ng-show="presenterForm.name.$invalid && presenterForm.name.$touched">Name is a required field</p>
+					</div>
+					<div class="form-group" ng-class="{'has-error': presenterForm.title.$invalid && presenterForm.title.$touched}">
+						<label>Presenter School/Position<span class="small">*</span></label>
+						<input type="text" class="form-control" ng-model="presenter.title" name="title" placeholder="CEO" required autocomplete="off">
+						<p class="help-block" ng-show="presenterForm.title.$invalid && presenterForm.title.$touched">Title is a required field</p>
+					</div>
+					<button class="btn btn-primary btn-xs" ng-click="submitPresenter()" ng-disabled="presenterForm.$invalid">Submit</button>
+				</form>
+				<form ng-show="addEditF" name="faciliatorForm" novalidate>
+					<button type="button" class="close" ng-click="closeF()">&times;</button>
+					<div class="form-group" ng-class="{'has-error':facilitatorForm.name.$invalid && facilitatorForm.name.$touched}">
+						<label>Facilitator Name<span class="small">*</span></label>
+						<input type="text" class="form-control" ng-model="facilitator.name" name="name" placeholder="John Doe" required autocomplete="off">
+						<p class="help-block" ng-show="facilitatorForm.name.$invalid && facilitatorForm.name.$touched">Name is a required field</p>
+					</div>
+					<div class="form-group" ng-class="{'has-error': facilitatorForm.title.$invalid && facilitatorForm.title.$touched}">
+						<label>Facilitator School/Position<span class="small">*</span></label>
+						<input type="text" class="form-control" ng-model="facilitator.title" name="title" placeholder="CEO" required autocomplete="off">
+						<p class="help-block" ng-show="facilitatorForm.title.$invalid && facilitatorForm.title.$touched">Title is a required field</p>
+					</div>
+					<button class="btn btn-primary btn-xs" ng-click="submitFacilitator()" ng-disabled="facilitatorForm.$invalid">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button ng-show="edit" ng-click="deleteEvent(event)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+	<button class="btn btn-primary" ng-click="ok()" ng-disabled="eventForm.$invalid">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

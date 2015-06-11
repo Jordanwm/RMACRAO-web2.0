@@ -1,0 +1,22 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="cancel()">&times;</button>
+	<h4 ng-show="edit" class="modal-title">Modify Map</h4>
+	<h4 ng-hide="edit" class="modal-title">Add a Map</h4>
+</div>
+<form class="modal-body" name="mapForm" novalidate>
+	<div class="form-group" ng-class="{ 'has-error': mapForm.name.$invalid && mapForm.name.$touched}">
+		<label>Name<span class="small">*</span></label>
+		<input type="text" class="form-control" placeholder="Conference Center" ng-model="name" name="name" required autocomplete="off">
+		<p class="help-block" ng-show="mapForm.name.$invalid && mapForm.name.$touched">Name is a required field</p>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': !img}">
+		<label>Map<span class="small">*</span></label>
+		<input type="file" name="image" ng-click="img=true" onchange="angular.element(this).scope().uploadFile(this.files);">
+		<p class="help-block" ng-hide="img">Uploading a map is required</p>
+	</div>
+	<img ng-src="{{image}}" class="map">
+</form>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()" ng-disabled="mapForm.$invalid">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

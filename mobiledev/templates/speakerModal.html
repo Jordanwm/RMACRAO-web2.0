@@ -8,12 +8,12 @@
 		<div class="col-md-8">
 			<div class="form-group" ng-class="{ 'has-error': speakerForm.name.$invalid && speakerForm.name.$touched}">
 				<label>Name<span class="small">*</span></label>
-				<input type="text" class="form-control" placeholder="John Doe" ng-model="speaker.name" name="name" required>
+				<input type="text" class="form-control" placeholder="John Doe" ng-model="speaker.name" name="name" required autocomplete="off">
 				<p class="help-block" ng-show="speakerForm.name.$invalid && speakerForm.name.$touched">Name is a required field</p>
 			</div>
 			<div class="form-group">
 				<label>Session</label>
-				<input type="text" class="form-control" placeholder="Opening Session" ng-model="speaker.session">
+				<input type="text" class="form-control" placeholder="Opening Session" ng-model="speaker.session" autocomplete="off">
 			</div>
 			<div class="form-group">
 				<label>Session Start and End Time<span class="small">*</span></label>
@@ -34,7 +34,7 @@
 			</div>
 			<div class="form-group">
 				<label>Title</label>
-				<input type="text" class="form-control" ng-model="speaker.title" placeholder="Title of Talk">
+				<input type="text" class="form-control" ng-model="speaker.title" placeholder="Title of Talk" autocomplete="off">
 			</div>
 		</div>
 		<div class="col-md-4">
@@ -49,7 +49,7 @@
 			</div>
 			<div class="form-group" ng-class="{ 'has-error': speakerForm.location.$invalid && speakerForm.location.$touched}">
 				<label>Location<span class="small">*</span></label>
-				<input type="text" class="form-control" placeholder="Grand Ballroom" ng-model="speaker.location" name="location" required>
+				<input type="text" class="form-control" placeholder="Grand Ballroom" ng-model="speaker.location" name="location" required autocomplete="off">
 				<p class="help-block" ng-show="speakerForm.location.$invalid && speakerForm.location.$touched">Location is a required field</p>
 			</div>
 		</div>

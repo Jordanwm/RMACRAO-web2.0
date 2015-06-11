@@ -76,6 +76,7 @@
 				<h5><strong>Title:</strong></h5><h6>{{selectedEvent.title}}</h6>
 				<div ng-show="selectedEvent.sid"><h5><strong>Session ID:</strong></h5><h6>{{selectedEvent.sid}}</h6></div>
 				<div ng-show="selectedEvent.description"><h5><strong>Description:</strong></h5><h6 style="white-space: pre-wrap;" ng-bind="selectedEvent.description"></h6></div>
+				<div ng-show="selectedEvent.survey"><h5><strong>Survey:</strong></h5><h6><a href="{{selectedEvent.survey}}" target="_blank">{{selectedEvent.survey}}</a></h6></div>
 				<div ng-show="selectedEvent.sponser"><h5><strong>Sponser:</strong></h5><h6>{{selectedEvent.sponser}}</h6></div>
 				<h5><strong>Location:</strong></h5><h6>{{selectedEvent.location}}</h6>
 				<div ng-show="selectedEvent.presenters.length > 0">

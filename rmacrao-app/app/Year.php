@@ -16,6 +16,10 @@ class Year extends Model {
 		return $this->hasMany('App\Exhibitor');
 	}
 
+	public function maps(){
+		return $this->hasMany('App\Map');
+	}
+
 	public $fillable = ['active', 'year', 'title', 'sdate', 'fdate', 'hotel', 'city',  'state', 'motto', 'president_message'];
 
 	public $timestamps = false;

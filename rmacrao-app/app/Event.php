@@ -16,7 +16,7 @@ class Event extends Model {
 		return $this->hasMany('App\Presenter');
 	}
 
-	protected $fillable = ['title', 'sid', 'description', 'sponser', 'location'];
+	protected $fillable = ['title', 'sid', 'description', 'survey', 'sponser', 'location'];
 
 	public $timestamps = false;
 

@@ -29,6 +29,7 @@ Route::get('/logout', function(){
 //GET ALL FOR THE VARIOUS CONTROLLERS
 Route::get('api/year', 'YearController@getYear');
 Route::get('api/years', 'YearController@getYears');
+Route::get('api/maps', 'MapController@getMaps');
 Route::get('api/days', 'DayController@getDays');
 Route::get('api/speakers', 'SpeakerController@getSpeakers');
 Route::get('api/exhibitors', 'ExhibitorController@getExhibitors');
@@ -40,6 +41,11 @@ Route::group(['prefix'=>'api', 'middleware'=>'auth'], function(){
 	Route::put('/years/{id}/activate', 'YearController@activateYear');
 	Route::put('/years/{id}', 'YearController@update');
 	Route::delete('/years/{id}', 'YearController@destroy');
+
+	//MAPS CONTROLLER
+	Route::post('maps', 'MapController@store');
+	Route::post('maps/{id}', 'MapController@update');
+	Route::delete('maps/{id}', 'MapController@destroy');
 
 	//DAYS CONTROLLER
 	Route::post('/days', 'DayController@storeDay');
@@ -56,11 +62,13 @@ Route::group(['prefix'=>'api', 'middleware'=>'auth'], function(){
 
 	//SPEAKERS CONTROLLER
 	Route::Post('/speakers', 'SpeakerController@store');
+	Route::Post('/speakers/image', 'SpeakerController@storeImage');
 	Route::Put('/speakers/{id}', 'SpeakerController@update');
 	Route::Delete('/speakers/{id}', 'SpeakerController@destroy');
 
 	//EXHIBITORS CONTROLLER
 	Route::Post('/exhibitors', 'ExhibitorController@store');
+	Route::Post('/exhibitors/image', 'ExhibitorController@storeImage');
 	Route::Put('/exhibitors/{id}', 'ExhibitorController@update');
 	Route::Delete('/exhibitors/{id}', 'ExhibitorController@destroy');
 });

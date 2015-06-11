@@ -1,0 +1,35 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="cancel()">&times;</button>
+	<h4 ng-show="edit" class="modal-title">Modify Session</h4>
+	<h4 ng-hide="edit" class="modal-title">Add a Session</h4>
+</div>
+<div class="modal-body">
+	<form name="sessionForm" novalidate>
+		<div class="form-group" ng-class="{ 'has-error':sessionForm.name.$invalid && sessionForm.name.$touched}">
+			<label>Session Name<span class="small">*</span></label>
+			<input class="form-control" type="text" ng-model="session.name" placeholder="Registration Open" name="name" autocomplete="off" required>
+			<p class="help-block" ng-show="sessionForm.name.$invalid && sessionForm.name.$touched">Session name is a required field</p>
+		</div>
+		<div class="form-group">
+			<label>Start Time of Session<span class="small">*</span></label>
+			<div class="text-center">
+				<div style="display:inline-block;" class="well well-sm">
+					<timepicker ng-model="session.stime" minute-step="15" hour-step="1" show-meridian="true"></timepicker>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label>End Time of Session<span class="small">*</span></label>
+			<div class="text-center">
+				<div class="well well-sm" style="display:inline-block;">
+					<timepicker ng-model="session.ftime" minute-step="15" hour-step="1" show-meridian="true"></timepicker>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button ng-show="edit" ng-click="deleteSession(session)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+	<button class="btn btn-primary" ng-click="ok()" ng-disabled="sessionForm.$invalid">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

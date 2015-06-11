@@ -1,0 +1,96 @@
+<div class="alert alert-warning" ng-show="years.length == 0">
+	You must create a year before you can add sessions.
+</div>
+<div class="row" ng-hide="years.length == 0">
+	<div class="col-md-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					Select a Day
+					<span class="btn btn-default btn-xs pull-right" ng-click="addDay()"><i class="glyphicon glyphicon-plus"></i></span>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<div class="list-group">
+					<div ng-show="days.length === 0" class="alert alert-info">Please add a day</div>
+					<div class="list-group-item" ng-repeat="day in days" ng-click="selectDay(day)" ng-class="{active: selectedDay === day}">
+						<h5>
+							<span ng-click="editDay(day)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-edit"></i></span>
+							{{day.day | date:'fullDate'}}
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3" ng-hide="selectedDay === null">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					Select a Session
+					<span class="btn btn-default btn-xs pull-right" ng-click="addSession()"><i class="glyphicon glyphicon-plus"></i></span>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<div class="list-group">
+					<div ng-show="selectedDay.sessions.length === 0" class="alert alert-info">Please add a session</div>
+					<div class="list-group-item" ng-repeat="session in selectedDay.sessions" ng-click="selectSession(session)" ng-class="{active: selectedSession === session}">
+						<h5>
+							<span ng-click="editSession(session)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-edit"></i></span>
+							{{session.stime | date: 'shortTime'}} - {{session.ftime | date: 'shortTime'}} | {{session.name}}
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3" ng-hide="selectedSession === null">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					Select an Event
+					<span class="btn btn-default btn-xs pull-right" ng-click="addEvent()"><i class="glyphicon glyphicon-plus"></i></span>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<div class="list-group">
+					<div ng-show="selectedSession.events.length === 0" class="alert alert-info">Please add an event</div>
+					<div class="list-group-item" ng-repeat="event in selectedSession.events" ng-click="selectEvent(event)" ng-class="{active: selectedEvent === event}">
+						<h5>
+							<span ng-click="editEvent(event)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-edit"></i></span>
+							{{event.title}}
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3" ng-hide="selectedEvent === null">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					{{selectedEvent.title | limitTo: 20}}...
+				</h4>
+			</div>
+			<div class="panel-body">
+				<h5><strong>Title:</strong></h5><h6>{{selectedEvent.title}}</h6>
+				<div ng-show="selectedEvent.sid"><h5><strong>Session ID:</strong></h5><h6>{{selectedEvent.sid}}</h6></div>
+				<div ng-show="selectedEvent.description"><h5><strong>Description:</strong></h5><h6 style="white-space: pre-wrap;" ng-bind="selectedEvent.description"></h6></div>
+				<div ng-show="selectedEvent.sponser"><h5><strong>Sponser:</strong></h5><h6>{{selectedEvent.sponser}}</h6></div>
+				<h5><strong>Location:</strong></h5><h6>{{selectedEvent.location}}</h6>
+				<div ng-show="selectedEvent.presenters.length > 0">
+					<h5><strong>Presenters:</strong></h5>
+					<ul class="list-unstyled">
+						<li class="h6" ng-repeat="presenter in selectedEvent.presenters">{{presenter.name}}, {{presenter.title}}</li>
+					</ul>
+				</div>
+				<div ng-show="selectedEvent.facilitators.length > 0">
+					<h5><strong>Facilitators:</strong></h5>
+					<ul class="list-unstyled">
+						<li class="h6" ng-repeat="facilitator in selectedEvent.facilitators">{{facilitator.name}}, {{facilitator.title}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
