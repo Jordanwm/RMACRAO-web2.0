@@ -61,6 +61,7 @@ Route::group(['prefix'=>'api', 'middleware'=>'auth'], function(){
 
 	//EXHIBITORS CONTROLLER
 	Route::Post('/exhibitors', 'ExhibitorController@store');
+	Route::Post('/exhibitors/image', 'ExhibitorController@storeImage');
 	Route::Put('/exhibitors/{id}', 'ExhibitorController@update');
 	Route::Delete('/exhibitors/{id}', 'ExhibitorController@destroy');
 });

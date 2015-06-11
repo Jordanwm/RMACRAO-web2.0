@@ -177,8 +177,8 @@ angular.module('app.services', [])
 	};
 	o.updateExhibitor = function(exhibitor){
 		$http.put('/api/exhibitors/' + exhibitor.id, exhibitor).then(function(res){
-			o.exhibitors.forEach(function(s, i){
-				if (s.id == res.data.id){
+			o.exhibitors.forEach(function(e, i){
+				if (e.id == res.data.id){
 					o.exhibitors[i] = res.data;
 				}
 			});
@@ -186,11 +186,24 @@ angular.module('app.services', [])
 	};
 	o.deleteExhibitor = function(exhibitor){
 		$http.delete('/api/exhibitors/' + exhibitor.id).then(function(res){
-			o.exhibitors.forEach(function(s, i){
-				if (s.id == res.data.id){
+			o.exhibitors.forEach(function(e, i){
+				if (e.id == res.data.id){
 					o.exhibitors.splice(i,1);
 				}
 			});
+		});
+	};
+	o.uploadImage = function(fd){
+		$http.post('/api/exhibitors/image', fd, {
+			withCredentials: true,
+			headers: {'Content-Type': undefined },
+			transformRequest: angular.identity
+		}).then(function(res){
+			o.exhibitors.forEach(function(e, i){
+				if (e.id == res.data.id){
+					o.exhibitors[i] = res.data;
+				}
+			})
 		});
 	};
 	o.getAll = function(){

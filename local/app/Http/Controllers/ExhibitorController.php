@@ -65,6 +65,20 @@ class ExhibitorController extends Controller {
 		}
 	}
 
+	public function storeImage(Request $request) {
+			//Image uploading
+			$exhibitor = Exhibitor::find($request->input('exhibitor'));
+			
+			$imageName = 'exhibitor_' . $exhibitor->id . '.' . $request->file('image')->getClientOriginalExtension();
+
+			$request->file('image')->move(base_path() . '/public/images/uploads/', $imageName);
+			$exhibitor->img_path = '/images/uploads/' . $imageName;
+
+			$exhibitor->save();
+			
+			return json_encode($this->getExhibitor($exhibitor->id));
+	}
+
 	/**
 	 * Update the specified resource in storage.
 	 *

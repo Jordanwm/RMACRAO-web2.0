@@ -31,6 +31,14 @@
 							<li class="h6" ng-repeat="staff in exhibitor.staff">{{staff.name}}, {{staff.title}}</li>
 						</ul>
 					</div>
+					<div class="form-group">
+						<label>Exhibitor Logo:</label>
+						<span class="btn btn-default btn-file pull-right">
+							Upload Logo
+							<input type="file" name="image" onchange="angular.element(this).scope().uploadFile(this.files, angular.element(this).scope().exhibitor.id);">
+						</span>
+					</div>
+					<img ng-src="{{exhibitor.img_path}}" ng-show="exhibitor.img_path">
 				</accordion-group>
 			</accordion>
 		</div>

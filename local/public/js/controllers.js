@@ -459,6 +459,15 @@ angular.module('app.controllers', ['app.services'])
 		}
 	};
 
+	$scope.uploadFile = function(files, id){
+		var fd = new FormData();
+
+		fd.append("exhibitor", id);
+		fd.append("image", files[0]);
+
+		Exhibitors.uploadImage(fd);
+	};
+
 	$scope.info = "Click on a name to display their information."
 	$scope.closeInfo = function() {
 		$scope.info = null;

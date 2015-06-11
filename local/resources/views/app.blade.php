@@ -4,10 +4,7 @@
 	<meta charset="UTF-8">
 	<title>RMACRAO WEB APP</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<style>
-		a {cursor:pointer;}
-		.page-header {margin-top:0;}
-	</style>
+	<link rel="stylesheet" href="/css/styles.css">
 </head>
 <body ng-app="app">
 	<nav class="navbar navbar-static-top navbar-inverse">

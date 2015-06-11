@@ -16,6 +16,7 @@ class CreateExhibitorsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('year_id');
+			$table->string('img_path');
 			$table->string('name');
 			$table->string('address');
 			$table->string('city');
