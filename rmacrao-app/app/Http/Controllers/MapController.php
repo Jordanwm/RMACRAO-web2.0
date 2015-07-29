@@ -9,6 +9,7 @@ use App\Year;
 use App\Map;
 
 use File;
+use Log;
 
 class MapController extends Controller {
 
@@ -52,11 +53,11 @@ class MapController extends Controller {
 		} else {
 			$map = Map::create($request->input());
 
-			Log::Info($request->file('image'));
-
 			$imageName = 'map_' . $map->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
 
-			$request->file('image')->move(base_path() . '/public/images/uploads/', $imageName);
+			Log::Info(public_path() . '/images/uploads/', $imageName);
+
+			$request->file('image')->move(public_path() . '/images/uploads/', $imageName);
 
 			$map->img_path = '/images/uploads/' . $imageName;
 
@@ -85,7 +86,7 @@ class MapController extends Controller {
 			}
 
 			$imageName = 'map_' . $map->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-			$request->file('image')->move(base_path() . '/public/images/uploads/', $imageName);
+			$request->file('image')->move(public_path() . '/images/uploads/', $imageName);
 			$map->img_path = '/images/uploads/' . $imageName;
 		}
 

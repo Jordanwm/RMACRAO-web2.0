@@ -69,7 +69,7 @@ class SpeakerController extends Controller {
 		
 		$imageName = 'speaker_' . $speaker->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
 
-		$request->file('image')->move(base_path() . '/public/images/uploads/', $imageName);
+		$request->file('image')->move(public_path() . '/images/uploads/', $imageName);
 		$speaker->img_path = '/images/uploads/' . $imageName;
 
 		$speaker->save();

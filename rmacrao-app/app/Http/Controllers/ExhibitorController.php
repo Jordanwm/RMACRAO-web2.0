@@ -77,7 +77,7 @@ class ExhibitorController extends Controller {
 			
 			$imageName = 'exhibitor_' . $exhibitor->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
 
-			$request->file('image')->move(base_path() . '/public/images/uploads/', $imageName);
+			$request->file('image')->move(public_path() . '/images/uploads/', $imageName);
 			$exhibitor->img_path = '/images/uploads/' . $imageName;
 
 			$exhibitor->save();

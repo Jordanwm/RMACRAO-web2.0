@@ -52,8 +52,6 @@ class MapController extends Controller {
 		} else {
 			$map = Map::create($request->input());
 
-			Log::Info($request->file('image'));
-
 			$imageName = 'map_' . $map->id . '_' . time() . '.' . $request->file('image')->getClientOriginalExtension();
 
 			$request->file('image')->move(base_path() . '/public/images/uploads/', $imageName);
