@@ -74,15 +74,15 @@ Route::group(['prefix'=>'api', 'middleware'=>'auth'], function(){
 });
 
 Route::get('api2/years', 'YearController@getYears');
-Route::get('api2/maps', functions(){
-	return json_encode(Map::all());
+Route::get('api2/maps', function(){
+	return json_encode(App\Map::all());
 });
 Route::get('api2/days', function(){
-	return json_encode(Day::with('sessions', 'sessions.events', 'sessions.events.presenters','sessions.events.facilitators')->get());
+	return json_encode(App\Day::with('sessions', 'sessions.events', 'sessions.events.presenters','sessions.events.facilitators')->get());
 });
 Route::get('api2/speakers', function(){
-	return json_encode(Speaker::all());
+	return json_encode(App\Speaker::all());
 });
 Route::get('api2/exhibitors', function(){
-	return json_encode(Exhibitor::with('staff')->get());
+	return json_encode(App\Exhibitor::with('staff')->get());
 });
